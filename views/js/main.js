@@ -425,6 +425,7 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
       switch(size) {
         case "1":
+           // Fix: Set the new width percentages directly rather than calculating them
           newWidth = 25;
           break;
         case "2":
@@ -436,10 +437,13 @@ var resizePizzas = function(size) {
         default:
           console.log("bug in sizeSwitcher");
     }
-
+     // Fix: Cache the querySelectorAll results in a new variable
+     // Tried: Use getElementsByClassName() instead of querySelectorAll() to improve performance - worse results
+    // var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
     var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
 
     for (var i = 0; i < randomPizzas.length; i++) {
+      // Fix: Remove unnecessary calculations and set new width directly
       randomPizzas[i].style.width = newWidth + "%";
     }
   }
@@ -490,6 +494,7 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
+  // Cache Math.sin calculation outside of the for loop instead of calcuating every time
   var sine = Math.sin(document.body.scrollTop / 1250);
   for (var i = 0; i < items.length; i++) {
     var phase =  sine + (i % 5);
@@ -513,7 +518,12 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  // Fix: Use screen height to calculate number of pizzas to display
+  // rather than having it hard coded to 200 pizzas
+  var screenHeight = window.screen.height;
+  // 80px seemed to be the right number to divide by to get accurate results
+  var numberToDisplay= Math.ceil(screenHeight/80) * cols;
+  for (var i = 0; i < numberToDislay; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
