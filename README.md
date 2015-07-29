@@ -5,7 +5,7 @@
 * Ran index.html through Google PageSpeed – 54/100 (mobile)
 60/100 (desktop)
 
-* Added async attribute to analytics.js <script> tag so that
+* Added async attribute to analytics.js script tag so that
 it doesn’t block DOM processing – 54/100 (mobile) 61/100 (desktop)
 
 * Added media attributes to CSS stylesheet – 54/100 (mobile)
