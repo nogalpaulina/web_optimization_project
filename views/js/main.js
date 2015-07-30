@@ -459,9 +459,10 @@ var resizePizzas = function(size) {
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
+// Move variable declaration outside the loop for better performance
+var pizzasDiv = document.getElementById("randomPizzas");
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -523,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var screenHeight = window.screen.height;
   // 80px seemed to be the right number to divide by to get accurate results
   var numberToDisplay= Math.ceil(screenHeight/80) * cols;
-  for (var i = 0; i < numberToDislay; i++) {
+  for (var i = 0; i < numberToDisplay; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
